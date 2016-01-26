@@ -1,6 +1,6 @@
 # OpenSSL Containers
 
-This are Docker Images to generate Root-CA, TLS-Server and TLS-Client containers.
+This are Docker Images to generate Root-CA, TLS-Server containers.
 
 They are based on [OpenSSL PKI Tutorial](https://pki-tutorial.readthedocs.org/en/latest/simple/index.html), and use OpenSSL toolkit.
 
@@ -18,12 +18,6 @@ to log into the TLS-Server container:
 
 ```
 $ docker run --name SERVER -p 443:443 -ti jordi/openssl-tlsserver
-```
-
-and to log into the TLS-Client container:
-
-```
-$ docker run --name CLIENT -ti jordi/openssl-tlsclient
 ```
 
 on all these containers you can scroll up throught `bash history` to use the recomended
