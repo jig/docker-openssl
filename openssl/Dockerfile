@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM jordi/ubuntu
 MAINTAINER Jordi Íñigo Griera
 
 # https://pki-tutorial.readthedocs.org/en/latest/simple/index.html
