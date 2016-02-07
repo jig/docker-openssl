@@ -1,4 +1,4 @@
-FROM jordi/openssl
+FROM jordi/openssl-with-dhparams
 MAINTAINER Jordi Íñigo Griera
 
 # https://pki-tutorial.readthedocs.org/en/latest/simple/index.html
