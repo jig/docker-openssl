@@ -5,8 +5,6 @@ MAINTAINER Jordi Íñigo Griera
 # https://evilshit.wordpress.com/2013/06/19/how-to-create-your-own-pki-with-openssl/
 # https://github.com/nginxinc/docker-nginx
 
-RUN apt-get update
-RUN openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
 RUN apt-get install -y nginx gettext-base \
     && rm -rf /var/lib/apt/lists/*
 # forward request and error logs to docker log collector
