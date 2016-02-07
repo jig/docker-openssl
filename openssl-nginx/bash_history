@@ -1,5 +1,5 @@
-openssl req -new -config etc/server.conf -out ee/server.csr -keyout ee/private/server.key
-cat ee/server.csr
-openssl req -in ee/server.csr -noout -text
-openssl s_server -key ee/private/server.key -cert ee/server.crt -accept 443 -www
+openssl req -new -config etc/server.conf -out server/server.csr -keyout server/private/server.key
+cat server/server.csr
+openssl req -in server/server.csr -noout -text
+openssl s_server -key server/private/server.key -cert certs/server.crt -accept 443 -www
 # nginx -g "daemon off;"

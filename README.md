@@ -11,13 +11,13 @@ It has pedagogical purposes to follow the PKI part of the [Introduction to Crypt
 To log into the CA container:
 
 ``` 
-$ docker run --name ROOT -ti jordi/openssl-ca
+$ docker run --name CA -ti jordi/openssl-ca
 ```
 
-to log into the TLS-Server container:
+to log into the TLS-Server/nginx container:
 
 ```
-$ docker run --name SERVER -p 443:443 -ti jordi/openssl-tlsserver
+$ docker run --name NGINX -p 443:443 -ti jordi/nginx
 ```
 
 on all these containers you can scroll up throught `bash history` to use the recomended
@@ -26,9 +26,9 @@ shell commands.
 To relaunch the created CA instance:
 
 ```
-$ docker rm ROOT
-$ docker start ROOT 
-$ docker attach ROOT 
+$ docker rm CA
+$ docker start CA 
+$ docker attach CA 
 ```
 
 # License

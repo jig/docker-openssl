@@ -15,8 +15,8 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 COPY nginx.conf /etc/nginx/sites-available/default
 
 WORKDIR /root
-RUN mkdir -p  ee/private
-RUN chmod 700 ee/private
+RUN mkdir -p  server/private
+RUN chmod 700 server/private
 ADD server.conf etc/server.conf
 ADD bash_history .bash_history
 

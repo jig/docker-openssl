@@ -1,0 +1,4 @@
+openssl req -new -config etc/browser.conf -out ee/browser.csr -keyout ee/private/browser.key
+cat ee/browser.csr
+openssl req -in ee/browser.csr -noout -text
+openssl s_client -key ee/private/browser.key -cert ee/browser.crt
