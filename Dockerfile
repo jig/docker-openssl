@@ -1,13 +1,13 @@
-FROM jordi/openssl
+FROM jordi/openssl-with-dhparams
 MAINTAINER Jordi Íñigo Griera
 
 RUN apt-get update
-RUN openssl dhparam -out /etc/ssl/certs/dhparam.pem 4096
-RUN apt-get install -y nginx gettext-base \
+
+# nginx server End-Entity prerequisites
+RUN apt-get install -y nginx gettext-base curl \
     && rm -rf /var/lib/apt/lists/*
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
-COPY openssl-nginx/nginx.conf /etc/nginx/sites-available/default
 
 ENV PASSWORD contrasenya
 
@@ -21,8 +21,9 @@ RUN echo 01 > ca/db/ca.crt.srl
 RUN echo 01 > ca/db/ca.crl.srl
 ADD openssl-ca/ca.conf etc/ca.conf
 RUN openssl req -passout env:PASSWORD -new -config etc/ca.conf -out ca/ca.csr -keyout ca/private/ca.key
-RUN openssl ca -batch -passin env:PASSWORD -selfsign -config etc/ca.conf -in ca/ca.csr -out ca/ca.crt -extensions ca_ext
+RUN openssl ca -batch -passin env:PASSWORD -selfsign -config etc/ca.conf -in ca/ca.csr -out ca/ca.crt -notext -extensions ca_ext
 RUN #-----CA-certificate----------------------------------------------
+RUN openssl x509 -in ca/ca.crt -noout -text
 RUN cat ca/ca.crt
 RUN #-----EMPTY-CRL---------------------------------------------------
 RUN openssl ca -batch -passin env:PASSWORD -config etc/ca.conf -gencrl -keyfile ca/private/ca.key -cert ca/ca.crt -out /root/ca/crl.pem
@@ -31,6 +32,7 @@ RUN openssl crl -inform PEM -in /root/ca/crl.pem -outform DER -out /root/ca/crl.
 # RUN rm /root/ca/crl.pem
 
 # nginx server End-Entity
+COPY openssl-nginx/nginx.conf /etc/nginx/sites-available/default
 RUN mkdir -p  server/private
 RUN chmod 700 server/private
 ADD openssl-nginx/server.conf etc/server.conf
