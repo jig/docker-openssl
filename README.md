@@ -31,6 +31,34 @@ $ docker start CA
 $ docker attach CA 
 ```
 
+## nginx config
+
+Current nginx config currently a rather restritive config (for educational purposes). Only PFS cipher-suites with long DHE/ECHDE generators. CipherScan reports:
+
+```
+root@90cf3bde1d2c:/git/cipherscan# ./cipherscan https://example.lan
+...........
+Target: example.lan:443
+
+prio  ciphersuite                  protocols  pfs                 curves
+1     ECDHE-RSA-AES256-GCM-SHA384  TLSv1.2    ECDH,P-384,384bits  secp384r1
+2     ECDHE-RSA-AES128-GCM-SHA256  TLSv1.2    ECDH,P-384,384bits  secp384r1
+3     DHE-RSA-AES256-GCM-SHA384    TLSv1.2    DH,4096bits         None
+4     DHE-RSA-AES128-GCM-SHA256    TLSv1.2    DH,4096bits         None
+5     ECDHE-RSA-AES256-SHA384      TLSv1.2    ECDH,P-384,384bits  secp384r1
+6     DHE-RSA-AES256-SHA256        TLSv1.2    DH,4096bits         None
+
+Certificate: trusted, 4096 bits, sha256WithRSAEncryption signature
+TLS ticket lifetime hint: 300
+OCSP stapling: not supported
+Cipher ordering: server
+Curves ordering: server - fallback: no
+Server supports secure renegotiation
+Server supported compression methods: NONE
+TLS Tolerance: yes
+
+```
+
 # License
 
 MIT licensed
