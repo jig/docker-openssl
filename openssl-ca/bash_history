@@ -5,3 +5,6 @@ openssl req -new -config etc/ca.conf -out ca/ca.csr -keyout ca/private/ca.key   
 openssl ca -selfsign -config etc/ca.conf -in ca/ca.csr -out ca/ca.crt -extensions ca_ext                  # ISSUE (SELF)CERTIFICATE
 # cat > reqs/server.csr                                                                                   # SAVE SERVER REQUEST
 # openssl ca -config etc/ca.conf -in reqs/server.csr -out certs/server.crt -extensions server_ext         # ISSUE SERVER CERT
+# openssl ca -config etc/ca.conf -gencrl -keyfile ca/private/ca.key -cert ca/ca.crt -out /root/ca/crl.pem # ISSUE EMPTY CRL
+# cat /root/ca/crl.pem
+# openssl crl -inform PEM -in /root/ca/crl.pem -outform DER -out /root/ca/crl.crl                         # CONVERT CRL TO DER FORMAT
