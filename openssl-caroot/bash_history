@@ -1,0 +1,17 @@
+### openssl rand -out random.bin 1000000                                                                  # GENERATE PSEUDO-RANDOM
+### openssl genrsa -out ca/private/root.key -aes256 -rand random.bin 4096                                   # GENERATE KEY
+### openssl req -new -x509 -days 3652 -key ca/private/root.key -out ca/root.crt -config config/ca.conf           # SELFSIGN CERTIFICATE (ROOT CA)
+# NO openssl req -new -config config/ca.conf -out ca/ca.csr -keyout ca/private/root.key                             # GENERATE KEY and SIGN REQUEST
+# NO openssl ca -selfsign -config config/ca.conf -in ca/ca.csr -out ca/root.crt -extensions ca_ext                  # ISSUE (SELF)CERTIFICATE
+# cat > reqs/server.csr                                                                                   # SAVE SERVER REQUEST
+# openssl ca -config config/ca.conf -in reqs/server.csr -out certs/server.crt -extensions server_ext         # ISSUE SERVER CERT
+# openssl ca -config config/ca.conf -gencrl -keyfile ca/private/root.key -cert ca/root.crt -out /root/ca/crl.pem # ISSUE EMPTY CRL
+# cat /root/ca/crl.pem
+# openssl crl -inform PEM -in /root/ca/crl.pem -outform DER -out /root/ca/crl.crl                         # CONVERT CRL TO DER FORMAT
+
+openssl req -newkey rsa:4096 -subj "/CN=Jordi's Root CA/OU=pkihub.com\/jordi" -keyout ca/private/root.key -out reqs/root.csr
+openssl ca -selfsign -config config/ca.conf -in reqs/root.csr -out certs/root.crt -extensions root_ca_ext
+cat certs/root.crt
+openssl ca -config config/ca.conf -gencrl -keyfile ca/private/root.key -cert certs/root.crt -out ca/crl.pem
+cat ca/crl.pem
+openssl ca -config config/ca.conf -in reqs/subor.csr -out certs/subor.crt -extensions subordinate_ca_ext

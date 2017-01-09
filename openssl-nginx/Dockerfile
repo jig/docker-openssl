@@ -10,12 +10,14 @@ RUN apt-get install -y nginx gettext-base \
 # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log
-COPY nginx.conf /etc/nginx/sites-available/default
+COPY nginx.conf /config/nginx/sites-available/default
 
 WORKDIR /root
 RUN mkdir -p  server/private
 RUN chmod 700 server/private
-ADD server.conf etc/server.conf
+RUN echo 'PS1="\[$(tput setaf 7)[\]SERVER@\\h$:\\w]#\[$(tput sgr0) \]"' >> /root/.bashrc
+
+ADD server.conf config/server.conf
 ADD bash_history .bash_history
 
 EXPOSE 443

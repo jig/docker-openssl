@@ -1,0 +1,5 @@
+openssl req -newkey rsa:4092 -subj "/CN=Jordi's Subordinate CA/OU=pkihub.com\/jordi" -keyout ca/private/ca.key
+# wait for root response
+cat > certs/subor.crt
+# issue certificates
+openssl ca -config config/ca.conf -in reqs/server.csr -out certs/server.crt -extensions server_ext
