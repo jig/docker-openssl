@@ -10,8 +10,8 @@
 # openssl crl -inform PEM -in /root/ca/crl.pem -outform DER -out /root/ca/crl.crl                         # CONVERT CRL TO DER FORMAT
 
 openssl req -newkey rsa:4096 -subj "/CN=Jordi's Root CA/OU=pkihub.com\/jordi" -keyout ca/private/root.key -out reqs/root.csr
-openssl ca -selfsign -config config/ca.conf -in reqs/root.csr -out certs/root.crt -extensions root_ca_ext
+openssl ca -selfsign -config config/ca.conf -in reqs/root.csr -out certs/root.crt -notext -extensions root_ca_ext
 cat certs/root.crt
 openssl ca -config config/ca.conf -gencrl -keyfile ca/private/root.key -cert certs/root.crt -out ca/crl.pem
 cat ca/crl.pem
-openssl ca -config config/ca.conf -in reqs/subor.csr -out certs/subor.crt -extensions subordinate_ca_ext
+openssl ca -config config/ca.conf -in reqs/subor.csr -out certs/subor.crt -notext -extensions subordinate_ca_ext
