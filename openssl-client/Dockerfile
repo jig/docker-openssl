@@ -9,7 +9,7 @@ RUN apt-get update
 WORKDIR /root
 RUN mkdir -p  ee/private
 RUN chmod 700 ee/private
-RUN echo 'PS1="\[$(tput setaf 7)[\]CLIENT@\\h$:\\w]#\[$(tput sgr0) \]"' >> /root/.bashrc
+RUN echo 'PS1="CLIENT:$PS1"' >> /root/.bashrc
 
 ADD browser.conf config/browser.conf
 ADD bash_history .bash_history

@@ -1,5 +1,6 @@
-openssl req -newkey rsa:4092 -subj "/CN=Jordi's Subordinate CA/OU=pkihub.com\/jordi" -keyout ca/private/subor.key
-# wait for root response
+openssl req -newkey rsa:4092 -subj "/CN=pki.safelayer.io\/jordi/O=Jordi/OU=First level Subordinate CA" -keyout ca/private/subor.key
 cat > certs/subor.crt
-# issue certificates
 openssl ca -config config/ca.conf -in reqs/server.csr -out certs/server.crt -notext -extensions server_ext
+openssl ca -config config/ca.conf -revoke certs/java.crt
+openssl ca -config config/ca.conf -gencrl -keyfile ca/private/subor.key -cert certs/subor.crt -out crl/crl.pem
+cat crl/crl.pem

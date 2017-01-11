@@ -8,7 +8,7 @@ RUN cp /dev/null ca/db/ca.db
 RUN cp /dev/null ca/db/ca.db.attr
 RUN echo 01 > ca/db/ca.crt.srl
 RUN echo 01 > ca/db/ca.crl.srl
-RUN echo 'PS1="\[$(tput setaf 2)[\]CASUBOR@\\h$:\\w]#\[$(tput sgr0) \]"' >> /root/.bashrc
+RUN echo 'PS1="CASUBOR:$PS1"' >> /root/.bashrc
 
 ADD ca.conf config/ca.conf
 ADD bash_history .bash_history

@@ -17,7 +17,7 @@ RUN mkdir -p  server/private
 RUN chmod 700 server/private
 RUN mkdir certs
 RUN mkdir crl
-RUN echo 'PS1="\[$(tput setaf 7)[\]SERVER@\\h$:\\w]#\[$(tput sgr0) \]"' >> /root/.bashrc
+RUN echo 'PS1="NGINX:$PS1"' >> /root/.bashrc
 
 ADD server.conf config/server.conf
 ADD bash_history .bash_history

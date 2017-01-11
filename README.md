@@ -8,10 +8,18 @@ It has pedagogical purposes to follow the PKI part of the [Introduction to Crypt
 
 # Instructions
 
-To log into the CA container:
+You need to log in on any container to access `openssl` commands and operate CAs, servers, etc.
+
+To log into the Root CA container:
 
 ``` 
-$ docker run --name CA -ti jordi/openssl-ca
+$ docker run --name CAROOT -ti jordi/openssl-caroot
+```
+
+To log into the Subordinate CA container:
+
+``` 
+$ docker run --name CASUBOR -ti jordi/openssl-casubor
 ```
 
 to log into the TLS-Server/nginx container:
@@ -23,17 +31,35 @@ $ docker run --name NGINX -p 443:443 -ti jordi/nginx
 on all these containers you can scroll up throught `bash history` to use the recomended
 shell commands.
 
-To relaunch the created CA instance:
+To relaunch the created NGINX (or any other container) instance if logged out:
 
 ```
-$ docker rm CA
-$ docker start CA 
-$ docker attach CA 
+$ docker start NGINX 
+$ docker attach NGINX 
 ```
+
+## Cleaning
+
+If you can delete the container (with its keys)
+
+```
+$ docker rm NGINX 
+```
+
+And to remove everything:
+
+```
+$ docker rm -f $(docker ps -aq)
+$ docker rmi -f $(docker images -q)
+```
+
 
 ## nginx config
 
-Current nginx config currently a rather restritive config (for educational purposes). Only PFS cipher-suites with long DHE/ECHDE generators. CipherScan reports:
+Current nginx config is rather restritive (for educational purposes). 
+Only PFS cipher-suites with long DHE/ECHDE generators. 
+
+CipherScan reports:
 
 ```
 root@90cf3bde1d2c:/git/cipherscan# ./cipherscan https://example.lan
