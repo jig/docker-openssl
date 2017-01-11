@@ -2,3 +2,4 @@ openssl req -new -config etc/browser.conf -out ee/browser.csr -keyout ee/private
 cat ee/browser.csr
 openssl req -in ee/browser.csr -noout -text
 openssl s_client -key ee/private/browser.key -cert ee/browser.crt
+openssl pkcs12 -export -out certificate.pfx -inkey ee/private/browser.key -in ee/browser.crt -certfile ee/subor.crt
