@@ -1,0 +1,7 @@
+openssl req -config config/ca.conf -new -keyout ca/private/subor.key -out reqs/subor.csr
+cat reqs/root.csr
+cat > certs/subor.crt
+openssl ca -config config/ca.conf -in reqs/server.csr -out certs/server.crt -notext -extensions server_ext
+openssl ca -config config/ca.conf -revoke certs/java.crt -crl_reason affiliationChanged
+openssl ca -config config/ca.conf -gencrl -keyfile ca/private/subor.key -cert certs/subor.crt -out crl/crl.pem
+cat crl/crl.pem

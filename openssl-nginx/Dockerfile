@@ -15,8 +15,13 @@ COPY nginx.conf /etc/nginx/sites-available/default
 WORKDIR /root
 RUN mkdir -p  server/private
 RUN chmod 700 server/private
-ADD server.conf etc/server.conf
+RUN mkdir certs
+RUN mkdir reqs
+RUN mkdir crl
+RUN echo 'PS1="NGINX:$PS1"' >> /root/.bashrc
+
+ADD server.conf config/server.conf
 ADD bash_history .bash_history
 
-EXPOSE 443
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 443 80
+# CMD ["nginx", "-g", "daemon off;"]

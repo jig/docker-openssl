@@ -1,0 +1,9 @@
+openssl req -config config/ca.conf -new -keyout ca/private/root.key -out reqs/root.csr
+openssl ca -selfsign -config config/ca.conf -in reqs/root.csr -out certs/root.crt -notext -extensions root_ca_ext
+cat certs/root.crt
+openssl ca -config config/ca.conf -gencrl -keyfile ca/private/root.key -cert certs/root.crt -out crl/crl.pem
+cat crl/crl.pem
+openssl ca -config config/ca.conf -in reqs/subor.csr -out certs/subor.crt -notext -extensions subordinate_ca_ext
+openssl x509 -in certs/root.crt -text -noout
+openssl req -in reqs/subor.csr -noout -text
+openssl crl -text -noout -in crl/crl.pem

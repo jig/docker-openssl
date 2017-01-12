@@ -9,5 +9,7 @@ RUN apt-get update
 WORKDIR /root
 RUN mkdir -p  ee/private
 RUN chmod 700 ee/private
-ADD browser.conf etc/browser.conf
+RUN echo 'PS1="CLIENT:$PS1"' >> /root/.bashrc
+
+ADD browser.conf config/browser.conf
 ADD bash_history .bash_history
