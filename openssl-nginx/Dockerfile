@@ -16,6 +16,7 @@ WORKDIR /root
 RUN mkdir -p  server/private
 RUN chmod 700 server/private
 RUN mkdir certs
+RUN mkdir reqs
 RUN mkdir crl
 RUN echo 'PS1="NGINX:$PS1"' >> /root/.bashrc
 
