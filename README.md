@@ -13,13 +13,13 @@ You need to log in on any container to access `openssl` commands and operate CAs
 To log into the Root CA container:
 
 ``` 
-$ docker run --name CAROOT -ti jordi/openssl-caroot
+$ docker run --name CAROOT -ti jordi/caroot
 ```
 
 To log into the Subordinate CA container:
 
 ``` 
-$ docker run --name CASUBOR -ti jordi/openssl-casubor
+$ docker run --name CASUBOR -ti jordi/casubor
 ```
 
 to log into the TLS-Server/nginx container:
@@ -37,6 +37,12 @@ To relaunch the created NGINX (or any other container) instance if logged out:
 $ docker start NGINX 
 $ docker attach NGINX 
 ```
+The client (browser keys) can be generated with:
+
+```
+$ docker run --name BROWSER -ti jordi/openssl-browser
+```
+
 
 ## Cleaning
 
