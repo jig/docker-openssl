@@ -1,0 +1,2 @@
+letsencrypt certonly --standalone -d myid.devops.safelayer.io -d myid.devops.safelayer.io
+cat /etc/letsencrypt/live/myid.devops.safelayer.io/fullchain.pem
