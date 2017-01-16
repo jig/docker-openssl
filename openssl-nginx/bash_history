@@ -4,3 +4,4 @@ cat > certs/server.crt
 openssl req -in reqs/server.csr -noout -text
 openssl s_server -key server/private/server.key -cert server/server.crt -accept 443 -www
 nginx -g "daemon off;"
+openssl ciphers -v -tls1
