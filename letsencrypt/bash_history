@@ -1,2 +1,2 @@
-letsencrypt certonly --standalone -d myid.devops.safelayer.io -d myid.devops.safelayer.io
+letsencrypt certonly --standalone -d jordi.safelayer.io -d jordi.safelayer.io
 cat /etc/letsencrypt/live/myid.devops.safelayer.io/fullchain.pem
