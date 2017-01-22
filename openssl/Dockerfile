@@ -14,5 +14,8 @@ RUN apt-get install net-tools
 # openssl is the only required thing to install
 RUN apt-get -y install openssl
 
+ADD bash_history .bash_history
+ADD dades /tmp/dades
+
 RUN echo "alias ll='ls -l'" >> /root/.bashrc
 RUN bash -c "history -a"
