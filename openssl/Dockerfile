@@ -19,3 +19,5 @@ ADD dades /tmp/dades
 
 RUN echo "alias ll='ls -l'" >> /root/.bashrc
 RUN bash -c "history -a"
+
+WORKDIR /root
