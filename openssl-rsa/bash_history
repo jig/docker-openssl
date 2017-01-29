@@ -1,0 +1,12 @@
+openssl genrsa 3072 -F4 -out private.key
+cat private.key
+openssl rsa -in private.key -noout -text
+openssl rsa -in public.key -pubout -out public.key
+cat public.key
+openssl rsa -pubin -in public.key -noout -text
+# raw signature and verification:
+openssl rsautl -sign   -in dades      -inkey private.key -out dades.sign
+openssl rsautl -verify -in dades.sign -inkey public.key  -raw -pubin -hexdump
+# encryption and decryption:
+openssl rsautl -encrypt -inkey public.key -pubin -in dades -out dades.enc
+openssl rsautl -decrypt -inkey private.key -in dades.enc
