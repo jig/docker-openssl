@@ -1,0 +1,8 @@
+openssl ecparam -out private.key -name prime256v1 -genkey
+cat private.key
+openssl ecparam -in private.key -noout -text
+openssl ec -in private.key -noout -text
+openssl ec -in private.key -pubout -out public.key
+openssl ec -in private.key -conv_form compressed -pubout -out public.key
+openssl dgst -sha256 -sign private.key < hello > hello.sig
+openssl dgst -sha256 -verify public.key -signature hello.sig < hello
