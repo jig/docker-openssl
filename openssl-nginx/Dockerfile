@@ -25,3 +25,4 @@ ADD bash_history .bash_history
 
 EXPOSE 443 80
 # CMD ["nginx", "-g", "daemon off;"]
+CMD ["bash"]
