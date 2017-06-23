@@ -2,7 +2,7 @@ openssl req -new -config config/server.conf -out reqs/server.csr -keyout server/
 cat reqs/server.csr
 cat > certs/subor.crt
 cat > certs/server.crt
-# remember to cancatenate subordinate CA cert to the server cert file:
+# remember to concatenate subordinate CA cert to the server cert file:
 cat certs/subor.crt >> certs/server.crt
 openssl req -in reqs/server.csr -noout -text
 openssl s_server -key server/private/server.key -cert server/server.crt -accept 443 -www
