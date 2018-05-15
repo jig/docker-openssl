@@ -1,4 +1,4 @@
-letsencrypt certonly --standalone -d jordi.safelayer.io
+certbot certonly --standalone -d jordi.safelayer.io
 cat /etc/letsencrypt/live/jordi.safelayer.io/fullchain.pem
 openssl ciphers -v -tls1
 nginx -g 'daemon off;'
