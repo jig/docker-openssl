@@ -1,7 +1,11 @@
 FROM jordi/nginx
 MAINTAINER Jordi Íñigo Griera
 
-RUN apt-get update && apt-get -y install letsencrypt
+RUN apt-get update && \
+    apt-get -y install software-properties-common && \
+    add-apt-repository -y ppa:certbot/certbot && \
+    apt-get update && \
+    apt-get -y install python-certbot-nginx
 
 ADD nginx.conf /etc/nginx/sites-available/default
 ADD bash_history .bash_history

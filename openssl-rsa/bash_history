@@ -1,4 +1,4 @@
-openssl genrsa 3072 -F4 -out private.key
+openssl genrsa -out private.key 3072 -F4
 cat private.key
 openssl rsa -in private.key -noout -text
 openssl rsa -in public.key -pubout -out public.key
