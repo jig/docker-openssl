@@ -1,0 +1,6 @@
+emacs /etc/nginx/sites-available/default
+certbot --nginx --register-unsafely-without-email -d #your-fqdn-here#
+ll /etc/letsencrypt/live
+openssl ciphers -v -tls1
+nginx -g 'daemon off;' # blocks shell
+nginx # launches daemon
