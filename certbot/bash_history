@@ -1,6 +1,15 @@
+openssl req -new -config config/server.conf -out reqs/server.csr -keyout server/private/server.key
+cat reqs/server.csr
+cat > certs/subor.crt
+cat > certs/server.crt
+# remember to concatenate subordinate CA cert to the server cert file:
+cat certs/subor.crt >> certs/server.crt
+openssl req -in reqs/server.csr -noout -text
+openssl s_server -key server/private/server.key -cert server/server.crt -accept 443 -www
+nginx -g "daemon off;"
+openssl ciphers -v -tls1
 emacs /etc/nginx/sites-available/default
+##
 certbot --nginx --register-unsafely-without-email -d #your-fqdn-here#
 ll /etc/letsencrypt/live
 openssl ciphers -v -tls1
-nginx -g 'daemon off;' # blocks shell
-nginx # launches daemon
